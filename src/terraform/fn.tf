@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "functions" {
-  name                     = "st${var.environment_name}${random_pet.name.id}"
+  name                     = "st${var.environment_name}${var.application_name}"
   resource_group_name      = azurerm_resource_group.main.name
   location                 = azurerm_resource_group.main.location
   account_tier             = "Standard"
@@ -7,7 +7,7 @@ resource "azurerm_storage_account" "functions" {
 }
 
 resource "azurerm_service_plan" "main" {
-  name                = "asp-${var.environment_name}-${random_pet.name.id}"
+  name                = "asp-${var.environment_name}-${var.application_name}"
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
   os_type             = "Linux"
@@ -16,12 +16,12 @@ resource "azurerm_service_plan" "main" {
 
 resource "azurerm_user_assigned_identity" "functions" {
   location            = azurerm_resource_group.main.location
-  name                = "mi-${var.environment_name}-${random_pet.name.id}-fn"
+  name                = "mi-${var.environment_name}-${var.application_name}-fn"
   resource_group_name = azurerm_resource_group.main.name
 }
 
 resource "azurerm_linux_function_app" "main" {
-  name                = "func-${var.environment_name}-${random_pet.name.id}"
+  name                = "func-${var.environment_name}-${var.application_name}"
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
 

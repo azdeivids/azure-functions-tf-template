@@ -10,7 +10,7 @@ on:
 
 env:
   TERRAFORM_WORKING_DIRECTORY: "src/terraform"
-  APPLICATION_NAME: "aztf"
+  APPLICATION_NAME: "azfn"
   ENVIRONEMNT_NAME: "dev"
 
 jobs:

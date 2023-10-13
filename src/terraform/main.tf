@@ -1,9 +1,5 @@
-resource random_pet name {
-  length = 1
-}
-
 resource azurerm_resource_group main {
-  name     = "rg-${var.environment_name}-${random_pet.name.id}"
+  name     = "rg-${var.environment_name}-${var.application_name}"
   location = var.location
 }
 
