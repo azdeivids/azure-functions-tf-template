@@ -11,7 +11,7 @@ on:
 env:
   TERRAFORM_WORKING_DIRECTORY: "src/terraform"
   APPLICATION_NAME: "azfn"
-  ENVIRONEMNT_NAME: "dev"
+  ENVIRONMENT_NAME: "dev"
 
 jobs:
   terraform:
