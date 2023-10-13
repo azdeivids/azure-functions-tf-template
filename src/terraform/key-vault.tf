@@ -17,7 +17,7 @@ resource "azurerm_key_vault_access_policy" "terraform-user" {
   depends_on   = [ azurerm_key_vault.main ]
 
   secret_permissions = [
-    "Get", "Backuk", "Delete", "List", "Purge", "Recover", "Restore", "Set"
+    "Get", "Backup", "Delete", "List", "Purge", "Recover", "Restore", "Set"
   ]
 }
 
