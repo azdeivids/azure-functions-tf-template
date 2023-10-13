@@ -1,6 +1,6 @@
 variable location {
   type = string
 }
-variable env_name {
+variable environment_name {
   type = string
 }
