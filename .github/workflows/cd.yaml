@@ -9,7 +9,7 @@ on:
       - '.github/workflow**'
 
 env:
-  WORKING_DIRECTORY: "src/terraform"
+  TERRAFORM_WORKING_DIRECTORY: "src/terraform"
   APPLICATION_NAME: "aztf"
   ENVIRONEMNT_NAME: "dev"
 
