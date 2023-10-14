@@ -13,7 +13,7 @@ env:
   APPLICATION_NAME: "azfn"
   ENVIRONMENT_NAME: "dev"
   DOTNET_VERSION: '6.0.x'
-  DOTNET_WORKING_DIRECTORY: "./src/dotnet/GitHubCrawler"
+  DOTNET_WORKING_DIRECTORY: "src/dotnet/GitHubCrawler"
 
 jobs:
   build:
