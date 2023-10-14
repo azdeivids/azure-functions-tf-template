@@ -12,8 +12,46 @@ env:
   TERRAFORM_WORKING_DIRECTORY: "src/terraform"
   APPLICATION_NAME: "azfn"
   ENVIRONMENT_NAME: "dev"
+  DOTNET_VERSION: '6.0.x'
+  DOTNET_WORKING_DIRECTORY: "./src/dotnet/GitHubCrawler"
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      
+      - name: Install Dependencies
+        run: dotnet restore
+        working-directory: ${{ env.DOTNET_WORKING_DIRECTORY }}
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+        working-directory: ${{ env.DOTNET_WORKING_DIRECTORY }}
+
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal --filter Category=Unit
+        working-directory: ${{ env.DOTNET_WORKING_DIRECTORY }}
+
+      - name: Publish
+        run: dotnet publish **/GitHubCrawler.csproj -c Release -o ./publish
+
+      - name: Generate Deployemnt Package
+        run: |
+          zip -r ../deployment.zip ./
+        working-directory: ${{ env.DOTNET_WORKING_DIRECTORY }}/publish
+
+      - name: Upload Deployment Package
+        uses: actions/upload-artifact@v2
+        with:
+          name: function-deployment
+          path: ${{ env.DOTNET_WORKING_DIRECTORY }}/deployments.zip
+
   terraform:
     runs-on: ubuntu-latest
     steps:

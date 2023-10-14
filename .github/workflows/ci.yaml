@@ -9,6 +9,7 @@ on:
 
 env:
   DOTNET_VERSION: '6.0.401'
+  WORKING_DIRECTORY: ./src/dotnet/GitHubCrawler
 
 jobs:
   build:
@@ -23,12 +24,12 @@ jobs:
       
       - name: Install Dependencies
         run: dotnet restore
-        working-directory: ./src/dotnet/GitHubCrawler
+        working-directory: ${{ env.WORKING_DIRECTORY }}
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
-        working-directory: ./src/dotnet/GitHubCrawler
+        working-directory: ${{ env.WORKING_DIRECTORY }}
 
       - name: Test
         run: dotnet test --no-restore --verbosity normal --filter Category=Unit
-        working-directory: ./src/dotnet/GitHubCrawler
+        working-directory: ${{ env.WORKING_DIRECTORY }}
